@@ -143,7 +143,7 @@ resource "aws_instance" "myweb" {
   instance_type            = "t3a.micro"
   availability_zone        = "${var.region}a"
   key_name                 = var.prefix
-  security_groups          = [element(concat(aws_security_group.myweb[*].id, list("")), 0)]
+  vpc_security_group_ids   = [element(concat(aws_security_group.myweb[*].id, list("")), 0)]
   user_data                = file("scripts/install.sh")
   subnet_id                = element(aws_subnet.internal[*].id, 0)
   tenancy                  = "default"
